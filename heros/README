@@ -1,0 +1,45 @@
+How to install and run nodejs with TypeScript code
+==================================================
+
+from: http://mherman.org/blog/2016/11/05/developing-a-restful-api-with-node-and-typescript/
+
+npm install -g typescript
+npm install -g typings
+
+edit tsconfig.json -- this is the TypeScript project definitions file
+
+npm init -y
+npm install --save express
+
+edit project *.ts files
+
+tsc 
+
+or
+
+tsc --watch
+
+node build/server.js
+
+npm install gulp@3.9.1 gulp-typescript@3.1.1 --save-dev
+
+edit gulpfile.js
+
+add the lines to package.json:
+"scripts": {
+  "build": "gulp scripts"
+},
+
+npm run build
+
+npm install @types/node @types/express @types/debug --save-dev
+
+add to package.json
+"scripts": {
+  "start": "node dist/index.js",
+  "build": "gulp scripts"
+},
+
+npm install express@4.14.0 body-parser@1.15.2 morgan@1.7.0 --save
+npm install @types/body-parser@0.0.33 @types/morgan@1.7.32 --save-dev
+
