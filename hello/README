@@ -1,0 +1,21 @@
+How to install and run nodejs with TypeScript code
+==================================================
+
+npm install -g typescript
+npm install -g typings
+
+edit tsconfig.json -- this is the TypeScript project definitions file
+
+npm init -y
+npm install --save express
+
+edit project *.ts files
+
+tsc 
+
+or
+
+tsc --watch
+
+node build/server.js
+
