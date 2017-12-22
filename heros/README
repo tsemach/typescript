@@ -40,6 +40,14 @@ add to package.json
   "build": "gulp scripts"
 },
 
-npm install express@4.14.0 body-parser@1.15.2 morgan@1.7.0 --save
-npm install @types/body-parser@0.0.33 @types/morgan@1.7.32 --save-dev
+npm install express body-parser morgan --save
+npm install @types/body-parser3 @types/morgan --save-dev
+
+To restart the server automatically:
+------------------------------------
+1) npm install nodemon --save-dev	# this install and add the package in development dependency
+2) add the line to scripts part of package.json:
+   --> "dev": "nodemon server.js"
+3) then run "npm run dev"
+
 
