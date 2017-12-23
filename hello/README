@@ -7,7 +7,10 @@ npm install -g typings
 edit tsconfig.json -- this is the TypeScript project definitions file
 
 npm init -y
+npm install
 npm install --save express
+npm install express body-parser morgan
+npm install @types/body-parser @types/morgan
 
 edit project *.ts files
 
@@ -18,4 +21,6 @@ or
 tsc --watch
 
 node build/server.js
+or 
+nodemon build/service.js
 

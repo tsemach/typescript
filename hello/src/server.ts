@@ -1,48 +1,75 @@
-/* app/controllers/welcomeController.ts */
-
-// Import only what we need from express
-import { Router, Request, Response } from 'express';
-
-// Assign router to the express.Router() instance
-const router: Router = Router();
-
-// The / here corresponds to the route that the WelcomeController
-// is mounted on in the server.ts file.
-// In this case it's /welcome
-router.get('/', (req: Request, res: Response) => {
-    // Reply with a hello world when no name param is provided
-    res.send('Hello, World!');
-});
-
-router.get('/:name', (req: Request, res: Response) => {
-    // Extract the name from the request parameters
-    let { name } = req.params;
-
-    // Greet the given name
-    res.send(`Hello, ${name}`);
-});
-
-// Export the express.Router() instance to be used by server.ts
-export const WelcomeController: Router = router;
-
-/* app/server.ts */
-
-// Import everything from express and assign it to the express variable
 import * as express from 'express';
+import * as logger from 'morgan';
+import * as bodyParser from 'body-parser';
 
-// Import WelcomeController from controllers entry point
-// import {WelcomeController} from './controllers';
+// Application: 
+// define two route objects, root and more endpoints.  
+//  root => is link to '/' and '/tsemach'
+//  more => is link to '/more', /more/tsemach'
+class Application {
 
-// Create a new express application instance
-const app: express.Application = express();
-// The port the express app will listen on
+  // ref to Express instance
+  public express: express.Application;
+
+  // run configuration methods on the express instance.
+  constructor() { 
+    this.express = express();
+    this.middleware();
+    this.routes();
+  }
+
+  // configure express middleware.
+  private middleware(): void {
+    this.express.use(logger('dev'));
+    this.express.use(bodyParser.json());
+    this.express.use(bodyParser.urlencoded({ extended: false }));
+  }
+
+  private routes(): void {
+    // route: root --------------------------------------------------------------
+    let root = express.Router();
+    
+    root.get('/', (req, res, next) => {
+      console.log("got root request");
+      res.json({
+        message: 'route: /',
+        paths: ['/tsemach', '/more', '/more/tsemach']
+      });
+    });
+    root.get('/tsemach', (req, res, next) => {
+      console.log("got request");
+      res.json({
+        message: 'Hello tsemach!'
+      });
+    });
+    this.express.use('/', root);
+    // --------------------------------------------------------------------------
+    
+    // route: more --------------------------------------------------------------
+    let more = express.Router();
+    
+    more.get('/', (req, res, next) => {
+      console.log("got request");
+      res.json({
+        message: 'Hello tsemach /more!'
+      });
+    });
+    more.get('/tsemach', (req, res, next) => {
+      console.log("got request");
+      res.json({
+        message: 'Hello tsemach, tsemach/more!'
+      });
+    });
+    this.express.use('/more', more);
+    // --------------------------------------------------------------------------
+  }
+}
+
+let application = new Application();
+
 const port: number = 3000;
 
-// Mount the WelcomeController at the /welcome route
-app.use('/welcome', WelcomeController);
-
-// Serve the application at the given port
-app.listen(port, () => {
-    // Success callback
+application.express.listen(port, () => {
+    // success callback
     console.log(`Listening at http://localhost:${port}/`);
 });
