@@ -9,23 +9,43 @@ export class Management {
   
     public add(): express.Router {
       // route: more --------------------------------------------------------------
-       let more = express.Router();
+       let mgmt = express.Router();
       
-      more.get('/', (req, res, next) => {
+      mgmt.get('/', (req, res, next) => {
         console.log("got request");
           res.json({
             message: 'Hello tsemach /management!'
           });
       });
     
-      more.get('/tsemach', (req, res, next) => {
+      mgmt.get('/tsemach', (req, res, next) => {
         console.log("got request");
         res.json({
           message: 'Hello tsemach, tsemach/management!'
         });
       });
   
-      return more;
+      mgmt.post('/post', function (req, res) {
+        console.log('got call from client post ' + req)        
+        let requestAsJson = JSON.stringify(req.body);
+
+        console.log('monitor: POST data received was: ' + requestAsJson);              
+            
+        // set the appropriate HTTP header
+        res.setHeader('Content-Type', 'application/json');
+           
+        res.json({
+          type: 'command',
+          session: "1234-abcd",
+          command: "sic",
+          arguments: {
+            ip: "192.168.0.1",
+            secret : "aaaa"
+          }
+        });      
+      })
+      
+      return mgmt;
    // --------------------------------------------------------------------------
     }
 }

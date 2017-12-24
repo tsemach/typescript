@@ -24,8 +24,8 @@ class Application {
   }
 
   private routes(): void {
-    this.express.use('/web_api', web_server.add())
-    this.express.use('/management', management.add());
+    this.express.use('/web_srv', web_server.add())
+    this.express.use('/web_api', management.add());
   }
 }
 

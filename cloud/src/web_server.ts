@@ -9,23 +9,43 @@ export class WebServer {
   
     public add(): express.Router {
       // route: more --------------------------------------------------------------
-       let root = express.Router();
+       let server = express.Router();
       
-      root.get('/', (req, res, next) => {
+      server.get('/', (req, res, next) => {
         console.log("got request");
           res.json({
             message: 'Hello tsemach /web_api!'
           });
       });
     
-      root.get('/tsemach', (req, res, next) => {
+      server.get('/tsemach', (req, res, next) => {
         console.log("got request");
         res.json({
           message: 'Hello tsemach, /web_api/tsemach!'
         });
       });
   
-      return root;
+      server.post('/', function (req, res) {
+        console.log('got call from client post ' + req)        
+        let requestAsJson = JSON.stringify(req.body);
+
+        console.log('monitor: POST data received was: ' + requestAsJson);              
+            
+        // set the appropriate HTTP header
+        res.setHeader('Content-Type', 'application/json');
+           
+        res.json({
+          subject: 'command',
+          session: "1234-abcd",
+          command: "reset",
+          arguments: {
+            ip: "192.168.0.1",
+            secret : "someone"
+          }
+        });      
+      })
+
+      return server;
    // --------------------------------------------------------------------------
     }
 }

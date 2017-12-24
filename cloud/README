@@ -24,3 +24,7 @@ node build/server.js
 or 
 nodemon build/service.js
 
+to send json post request:
+--------------------------
+echo '{ "sequence": 1, "user": {"name": "john"} }' | http :3000/web_srv
+
