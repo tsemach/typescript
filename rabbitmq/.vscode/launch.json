@@ -1,0 +1,38 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "ReceiverTest Program",
+            "program": "${workspaceFolder}/dist/tests/broker/broker_receive_test_async.js",
+            // "preLaunchTask": "tsc: build - tsconfig.json",
+            // "outFiles": [
+            //     "${workspaceFolder}/dist/**/*.js"
+            // ]
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Server Program",
+            "program": "${workspaceFolder}/dist/server.js",
+            "preLaunchTask": "tsc: build - tsconfig.json",
+            "outFiles": [
+                "${workspaceFolder}/dist/**/*.js"
+            ]
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Main Program",
+            "program": "${workspaceFolder}/dist/main.js",
+            "preLaunchTask": "tsc: build - tsconfig.json",
+            "outFiles": [
+                "${workspaceFolder}/dist/**/*.js"
+            ]
+        }
+    ]
+}
