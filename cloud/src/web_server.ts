@@ -6,13 +6,13 @@ export class WebServer {
 
     constructor() {
     }
-  
+
     public add(): express.Router {
+
       // route: more --------------------------------------------------------------
-       let server = express.Router();
-      
-      server.get('/', (req, res, next) => {
-        console.log("got request");
+      let server = express.Router();
+        server.get('/', (req, res, next) => {
+          console.log("got request");
           res.json({
             message: 'Hello tsemach /web_api!'
           });

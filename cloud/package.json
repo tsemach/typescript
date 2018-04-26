@@ -4,6 +4,7 @@
   "description": "How to install and run nodejs with TypeScript code ==================================================",
   "main": "index.js",
   "dependencies": {
+    "body-parser": "^1.18.2",
     "express": "^4.16.2",
     "morgan": "^1.9.0",
     "typings": "^2.1.1"
