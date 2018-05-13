@@ -1,0 +1,1 @@
+require('./build/application/application.js');

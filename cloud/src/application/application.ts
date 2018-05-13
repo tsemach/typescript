@@ -2,8 +2,9 @@ import * as express from 'express';
 import * as logger from 'morgan';
 import * as bodyParser from 'body-parser';
 
-import web_server from './web_server';
-import management from './management';
+import web_server from '../services/web_server';
+import management from '../services/management';
+import angular from '../services/angular';
 
 class Application {
 
@@ -26,6 +27,7 @@ class Application {
   private routes(): void {
     this.express.use('/web_srv', web_server.add())
     this.express.use('/web_api', management.add());
+    this.express.use('/angular', angular.add());
   }
 }
 

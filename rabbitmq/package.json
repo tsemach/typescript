@@ -23,6 +23,7 @@
   "description": "How to install and run nodejs with TypeScript code ==================================================",
   "main": "dist/main.js",
   "devDependencies": {
+    "@angular/cli": "^1.7.4",
     "typescript": "^2.8.1"
   },
   "author": "Tsemach Mizrtachi",
