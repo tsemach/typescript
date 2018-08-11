@@ -13,14 +13,14 @@
 function classDecorator<T extends {new(...args:any[]):{}}>(constructor:T) {
     return class extends constructor {
         newProperty = "new property";
-        hello = "override";
+        hello = "override";        
     }
 }
 
 @classDecorator
 class Greeter {
-  property = "property";
-     hello: string;
+    property = "property";
+    hello: string;
     constructor(m: string) {
         this.hello = m;
     }
