@@ -1,6 +1,7 @@
 import * as express from 'express';
 import * as logger from 'morgan';
 import * as bodyParser from 'body-parser';
+import * as cors from 'cors';
 
 import web_server from '../services/web_server';
 import management from '../services/management';
@@ -13,6 +14,7 @@ class Application {
   // run configuration methods on the express instance.
   constructor() { 
     this.express = express();
+    this.express.use(cors())
     this.middleware();
     this.routes();
   }
