@@ -8,7 +8,8 @@ export function Component(config) {
         console.log('[Component:sayHello] config = ' + JSON.stringify(config));     
         console.log('[Component:sayHello] args = ' + JSON.stringify(args));     
     }       
-    
+        
+
     // this is an example of adding method to the class 
     // using Object.defineProperty
     Object.defineProperty(

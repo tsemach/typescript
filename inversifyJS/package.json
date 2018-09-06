@@ -1,0 +1,17 @@
+{
+  "name": "inversifyjs",
+  "version": "0.0.1",
+  "description": "a test driver of inversifyJS",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "author": "Tsemach Mizrachi <tsemach.mizrachi@gmail.com> (http://tsemach.github.io)",
+  "license": "ISC",
+  "dependencies": {
+    "@types/uuid": "^3.4.4",
+    "inversify": "^4.13.0",
+    "reflect-metadata": "^0.1.12",
+    "uuid": "^3.3.2"
+  }
+}

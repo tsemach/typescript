@@ -28,4 +28,5 @@ class Person {
 
 let person = new Person();
 console.log(person.sayMyName()); // Tsemach Mizrachi
+console.log(person.firstName); // Tsemach Mizrachi
 

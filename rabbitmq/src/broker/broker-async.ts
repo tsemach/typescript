@@ -109,8 +109,11 @@ class BrokerAsync {
         this.ch = await conn.createChannel();
 
         try {
-            await Promise.all(this.config.exchanges.map((ex) => {this.ch.assertExchange(ex.name, ex.type, ex.options)}));
-
+            await Promise.all(this.config.exchanges.map(
+                (ex) => {
+                    this.ch.assertExchange(ex.name, ex.type, ex.options)
+                }
+            ));
             console.log("init exchanges ok");
         }
         catch(e) {
@@ -123,7 +126,6 @@ class BrokerAsync {
     }
 
     send(ex, key, msg, options = null, noAck = true) {
-
         let _options = {
             persistent: false,
             noAck: noAck,
@@ -135,7 +137,6 @@ class BrokerAsync {
                 source: ex + ":" + key
             }
         };
-
         options = options === null ? _options : options;
 
         this.ch.publish(ex, key, Buffer.from(msg), options);
