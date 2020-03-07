@@ -1,0 +1,1 @@
+npm run compile;  npx jest --rootDir dist --watchAll dist/tests/sound-player/mock-factory/sound-player-consumer-factory.test.js

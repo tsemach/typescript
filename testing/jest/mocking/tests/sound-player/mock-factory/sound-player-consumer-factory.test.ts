@@ -3,17 +3,16 @@ import SoundPlayer from '../../../src/sound-player/sound-player';
 import 'jest';
 
 const mockPlaySoundFile = jest.fn();
-jest.mock('../../src/sound-player', () => {
-  return function() {
+jest.mock('../../../src/sound-player/sound-player', () => {
+  return jest.fn().mockImplementation(() => {
     return {playSoundFile: () => {}};
-  };
+  });
 });
+const mockSoundPlayer = <jest.Mock<SoundPlayer>>SoundPlayer;
 
 describe('Sound Player Test', () => {
   beforeEach(() => {
-    //SoundPlayer.mockClear;
-    const mockClean = SoundPlayer['mockClear'];
-    //mockClean();
+    mockSoundPlayer.mockClear;    
     mockPlaySoundFile.mockClear();
   });
 
@@ -24,16 +23,19 @@ describe('Sound Player Test', () => {
     expect(soundPlayerConsumer).toBeTruthy();
   });
 
-  // it('We can check if the consumer called the class constructor', () => {
-  //   const soundPlayerConsumer = new SoundPlayerConsumer();
-
-  //   expect(SoundPlayer).toHaveBeenCalledTimes(1);
-  // });
-
-  it('We can check if the consumer called a method on the class instance', () => {
+  it('We can check if the consumer called the class constructor', () => {
     const soundPlayerConsumer = new SoundPlayerConsumer();
-    const coolSoundFileName = 'song.mp3';
-    soundPlayerConsumer.playSomethingCool();
-    expect(mockPlaySoundFile.mock.calls[0][0]).toEqual(coolSoundFileName);
-  });  
+
+    //expect(SoundPlayer).toHaveBeenCalledTimes(1);
+    expect(mockSoundPlayer.mock.calls.length).toEqual(1)
+  });
+
+  // it('We can check if the consumer called a method on the class instance', () => {
+  //   const soundPlayerConsumer = new SoundPlayerConsumer();
+  //   const coolSoundFileName = 'song.mp3';
+  //   soundPlayerConsumer.playSomethingCool();
+    
+  //   console.log("mockPlaySoundFile:", mockPlaySoundFile);
+  //   //expect(mockPlaySoundFile.mock.calls[0][0]).toEqual(coolSoundFileName);
+  // });  
 })
