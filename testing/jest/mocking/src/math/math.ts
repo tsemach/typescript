@@ -1,4 +1,4 @@
-export const add      = (a: number, b: number) => a + b;
-export const subtract = (a: number, b: number) => b - a;
-export const multiply = (a: number, b: number) => a * b;
-export const divide   = (a: number, b: number) => b / a;
+export const add = (a: number, b: number) => a + b;
+export const sub = (a: number, b: number) => a - b;
+export const mul = (a: number, b: number) => a * b;
+export const div = (a: number, b: number) => a / b;

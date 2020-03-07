@@ -3,7 +3,7 @@ import SoundPlayer from '../../../src/sound-player/sound-player';
 import 'jest';
 
 const mockPlaySoundFile = jest.fn();
-jest.mock('../../src/sound-player', () => {
+jest.mock('../../../src/sound-player/sound-player', () => {
   return jest.fn().mockImplementation(() => {
     return {playSoundFile: mockPlaySoundFile};
   });
@@ -12,7 +12,7 @@ jest.mock('../../src/sound-player', () => {
 describe('Sound Player Test', () => {
   beforeEach(() => {
     //SoundPlayer.mockClear;
-    const mockClean = SoundPlayer['mockClear'];
+    //const mockClean = SoundPlayer['mockClear'];
     //mockClean();
     mockPlaySoundFile.mockClear();
   });
