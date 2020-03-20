@@ -1,0 +1,21 @@
+{
+	"compilerOptions": {
+  	"module": "commonjs",
+		"target": "es2017",
+    "types": ["node", "reflect-metadata"],
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "declaration": true,
+		"noImplicitAny": false,
+		"sourceMap": true,
+		"outDir": "dist"
+
+  },
+	"include": [
+      "src/**/*.ts",
+      "tests/**/*.ts", "src/users-register/lambda.js"
+    ],
+    "exclude": [
+        "node_modules"
+    ]
+}
