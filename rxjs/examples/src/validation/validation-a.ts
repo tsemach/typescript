@@ -21,9 +21,9 @@ export default class ValidationA extends Validation {
       console.log('[validation-a] got data:', data);      
       data.count += 1;
       this.count = data.count;
-      if (data.count === 2) {
-        data.valid = false;
-      }
+      // if (data.count === 2) {
+      //   data.valid = false;
+      // }
       
       function delay(ms: number) {
         return new Promise(resolve => {
@@ -32,15 +32,16 @@ export default class ValidationA extends Validation {
       }      
       
       await delay(1000);
-      console.log('[validation-a] sending data:', data);      
-      observer.next({sta: `ddd - ${data.count}`});
+      console.log('[validation-a] sending data:', data);  
+      observer.next({ from: this, valid: true, reason: 'ValidationTestA everything is ok', payload: {from: 'valid-a', count: data.count} });    
+      //observer.next({sta: `ddd - ${data.count}`});
       observer.complete();    
     });
     
     return event$;
   }
 
-  valid(data: any): import("./validation.valid").ValidationValid {
-    throw new Error("Method not implemented.");
+  valid(data: any): import("./validation.valid").ValidationValid {  
+    return { from: this, valid: true, reason: 'ValidationTestA everything is ok', payload: {from: 'valid-a', count: data.count} }
   }
 }

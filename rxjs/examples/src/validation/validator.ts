@@ -11,7 +11,7 @@ import { Validation } from './validation';
 
 export default class Validator {
   private data: any;
-  private valid: ValidationValid = { valid: true, reason: '', payload: {} };
+  private valid: ValidationValid = { from: null, valid: true, reason: '', payload: {} };
   private valids = new Array<Validation>();
 
   constructor(private scope: string) {    
@@ -19,7 +19,7 @@ export default class Validator {
 
   check(data: any) {
     this.data = data;
-    this.valid = { valid: true, reason: '', payload: {} };
+    this.valid = { from: null, valid: true, reason: '', payload: {} };
     while(this.valids.length > 0) {
       this.valids.pop();
     }
@@ -58,20 +58,37 @@ export default class Validator {
   }
 
   async exec() {
+
     const value = await from(this.valids).pipe(
       // filter(v => { console.log('[filter-1] data is:', data, 'of name', v); return data.valid }),
-      concatMap((v: any) => { 
+      concatMap((v: Validation) => { 
         console.log('[concatMap]: is:', v);
         
-        return v.xvalid(this.data) 
+        // return of({ from: v, valid: v.xvalid(this.data) })
+        return v.xvalid(this.data);
       }),
-      filter(v => { console.log('[filter-2] data is:', this.data, 'of name', v); return true })
-  
-      ).toPromise()
+      filter((valid: ValidationValid) => { 
+        console.log('[filter-2] data is:', this.data, 'of name', valid); 
+        console.log('[filter-2] this.constractor:', this.constructor.name)
+        if ( ! this.valid.valid ) {
+          return false;
+        }
+
+        this.valid.valid = valid.valid;
+        this.valid.reason = valid.reason;
+        Object.defineProperty(this.valid.payload, valid.from.indicator.toString(), {
+          value: valid.payload,
+          writable: false,
+          enumerable: true
+        });        
+
+        return true;
+      })
+    ).toPromise()
     console.log('data is', this.data);
     console.log('value is', value);
 
-    return value;
+    return this.valid;
   }
 
   async ais(name: string) {                                                                  
@@ -95,5 +112,5 @@ export default class Validator {
 
   get value() {
     return this.valid;
-  }
+  } 
 }

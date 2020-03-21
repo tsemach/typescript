@@ -34,13 +34,13 @@ export default class ValidationB extends Validation {
       
       await delay(1000);
       console.log('[validation-b] sending data:', data);      
-      observer.next({sta: `ddd - ${data.count}`});
+      observer.next({ from: this, valid: false, reason: 'ValidationTestB everything is ok', payload: {from: 'valid-b', count: data.count} });    
       observer.complete();    
     });
     
     return event$;
   }
   valid(data: any): ValidationValid {
-    throw new Error("Method not implemented.");
+    return { from: this, valid: true, reason: 'ValidationTestB everything is ok', payload: {from: 'valid-b', count: data.count} }
   }
 }

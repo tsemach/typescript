@@ -22,9 +22,9 @@ export default class ValidationC extends Validation {
       console.log('[validation-c] got data:', data);      
       data.count += 1;
       this.count = data.count;
-      if (data.count === 2) {
-        data.valid = false;
-      }
+      // if (data.count === 2) {
+      //   data.valid = false;
+      // }
 
       function delay(ms: number) {
         return new Promise(resolve => {
@@ -34,7 +34,7 @@ export default class ValidationC extends Validation {
       
       await delay(1000);
       console.log('[validation-c] sending data:', data);      
-      observer.next({sta: `ddd - ${data.count}`});
+      observer.next({ from: this, valid: true, reason: 'ValidationTestC everything is ok', payload: {from: 'valid-b', count: data.count} });    
       observer.complete();    
     });
       
@@ -42,6 +42,6 @@ export default class ValidationC extends Validation {
   }
 
   valid(data: any): ValidationValid {
-    throw new Error("Method not implemented.");
+    return { from: this, valid: true, reason: 'ValidationTestC everything is ok', payload: {from: 'valid-b', count: data.count} }
   }
 }
